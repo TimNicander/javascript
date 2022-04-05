@@ -1,6 +1,6 @@
 const playership  = document.createElement("img");
     playership.src = "playership.png";
-
+/*export player properties and establish variables*/
 export default class Player{
     constructor(x, y, bulletController,) {
         this.x = x; 
@@ -10,12 +10,12 @@ export default class Player{
         this.width  = 50;
         this.height = 50;
         this.speed = 1.5;
-
+        /*establish keydown and keyup properties for user controll over player*/
         document.addEventListener("keydown", this.keydown);
         document.addEventListener("keyup", this.keyup);
 
     } 
-
+    /*draws out player, including image and health*/ 
     draw(ctx){
         this.move();
         ctx.drawImage(playership, this.x+-60, this.y+20)
@@ -28,7 +28,7 @@ export default class Player{
             this.x+20, 
             this.y+120);
     }
-
+    /*properties that allow the player to shoot*/
     shoot(){
         if(this.shootPressed){
             const speed = 2.5;
@@ -39,7 +39,7 @@ export default class Player{
             this.bulletController.shoot(bulletX, bulletY, speed, damage, delay2);
         }
     }
-    
+    /*if statments to allow the player to move*/
     move(){
         if(this.leftPressed){
             this.x -= this.speed;
@@ -49,6 +49,7 @@ export default class Player{
         }
     }
 
+    /*if statments to controll if keys are pressed*/
     keydown =(e)=>{
         if(e.code === "ArrowLeft"){
             this.leftPressed = true;
@@ -60,6 +61,7 @@ export default class Player{
             this.shootPressed = true;
         }
     }
+    /*if statments to controll if keys are not pressed*/
     keyup =(e)=>{
         if(e.code === "ArrowLeft"){
             this.leftPressed = false;
@@ -71,6 +73,7 @@ export default class Player{
             this.shootPressed = false;
         }
     }
+    /*properties for player to take damage*/
     takeDamage(damage){
         this.health -= damage
     }
